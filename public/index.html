@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ArrumAqui</title>
+    <title>Embedded AD Portal</title>
     <link rel="shortcut icon" href="favicon_16.png" type="image/x-icon">
 
     <!-- CSS -->
@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#!/home">ArrumaAqui
+                        <a class="nav-link" href="#!/home">Mean-AD
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
@@ -43,9 +43,9 @@
                         <li class="nav-item">
                             <span style="cursor: default;" class="nav-link" href="javascript:void(0)">{{$root.usuarioLogado[0].nome}}</span>
                         </li>
-                        <li class="nav-item active">
+                        <!-- <li class="nav-item active">
                             <a ng-href="#!/cadastrar" class="nav-link" ng-show="$root.token == null">Cadastrar </a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item active">
                             <a ng-href="#!/editar" class="nav-link" ng-show="$root.token != null">Editar </a>
@@ -66,132 +66,6 @@
         <span style="cursor: pointer;"  data-toggle="modal" data-target="#detalhesDEV" ng-click="main.openModal()">Equipe</span>
     </div>
 
-    <!-- Modal com Detalhes dos Desenvolvedores -->
-    <div class="modal fade" id="detalhesDEV" tabindex="-1" role="dialog" aria-labelledby="detalhesDEVTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header list-group-item-primary">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Equipe de Desenvolvedores</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row pt-md">
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/ana.jpg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/ana29">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Ana Isadora</h1>
-                            <h2>Desenvolvedora</h2>
-                        </div>
-                    
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/day.jpg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/DayanaSouza">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Dayana Souza</h1>
-                            <h2>Desenvolvedora</h2>
-                        </div>
-                    
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/johanny.jpg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/johannydls">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Johanny Santos</h1>
-                            <h2>Desenvolvedor</h2>
-                        </div>
-                    
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/pedro.jpg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/liraop">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Pedro<br> Lira</h1>
-                            <h2>Desenvolvedor</h2>
-                        </div>
-                    </div>
-
-                    <div class="row pt-md">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/eric.png" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/ericbreno">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Eric<br> Breno</h1>
-                            <h2>Scrum Master</h2>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/lucas.jpeg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/lucasecdb">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Lucas<br> Cordeiro</h1>
-                            <h2>Gestor de Qualidade</h2>
-                        </div>
-
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 profile text-center">
-                            <div class="img-box">
-                                <img src="/img/rafael.jpeg" class="img-responsive">
-                                <ul class="text-center">
-                                    <a target="_blank" href="https://github.com/rafaeltj13">
-                                        <li>
-                                            <i class="fa fa-github"></i>
-                                        </li>
-                                    </a>
-                                </ul>
-                            </div>
-                            <h1>Rafael<br> Maciel</h1>
-                            <h2>Gestor de Escopo</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <style>
         .footer {
