@@ -19,7 +19,8 @@
         "method-override": "^2.3.10",
         "jsonwebtoken": "^5.7.0",
         "mongoose": "^5.2.1",
-        "bcrypt": "^1.0.2"
+        "bcrypt": "^1.0.2",
+        "ad": "^0.3.2"
     },
     "devDependencies": {
         "passport": "0.4.x",
