@@ -13,7 +13,7 @@ module.exports = function (app) {
         .delete(controller.removeUsuario);
 
     app.route('/api/usuarios/email')
-        .post(controller.autenticaUsuario)
+        .post(controller.autenticaUsuario);
 
     app.route('/api/usuarios/:id')
         .get(controller.obtemUsuarioPorId)
@@ -23,5 +23,5 @@ module.exports = function (app) {
         .get(controller.listaServicos);
 
     app.route('/api/login')
-        .post(controller.autenticaLogin);
+        .post(controller.autenticaUsuario);
 }

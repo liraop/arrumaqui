@@ -1,10 +1,14 @@
 //Controller para a entidade usuario
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
+var ActiveDirectory = require('activedirectory2');
+
 
 module.exports = function (app) {
+
     var Usuario = app.models.usuario;
     var controller = {};
+    var ad = new ActiveDirectory(config);
 
     //Função que salva o usuario no bd
     controller.salvaUsuario = (req, res) => {
@@ -37,8 +41,8 @@ module.exports = function (app) {
         let _novoTelefone = req.body.novoTelefone;
         let _novoWhats = req.body.novoWhatsapp;
         let _novaIdade = req.body.novaIdade;
-        let _novosServicos = req.body.novosServicos;        
-        
+        let _novosServicos = req.body.novosServicos;
+
         Usuario.findById(criterio).exec()
             .then(function (usuario) {
                 if (!usuario) {
@@ -191,8 +195,8 @@ module.exports = function (app) {
 
         });
     };
-   
-    //Autentica Login 
+
+    //Autentica Login
     controller.autenticaLogin = (req, res, next) => {
         console.log('API: autenticaLogin');
         let _emailUsuario = req.body.email;
@@ -229,33 +233,27 @@ module.exports = function (app) {
             }
         );
     }
-    
+
     //Autentica usuario
     controller.autenticaUsuario = (req, res) => {
         console.log('API: autenticaUsuario');
-        let _emailUsuario = req.body.email;
-        let _senha = req.body.senha
+        let _user = req.body.email;
+        let _pw = req.body.senha;
 
-        let criterio = { "contato.email": _emailUsuario };
-        Usuario.findOne(criterio).then(function (usuario) {
-            if (!usuario) {
-                res.status(401).json({ success: false, message: 'Usuário não encontrado!' });
-            } else if (usuario) {
-                bcrypt.compare(_senha, usuario.senha).then(function (passcheck) {
-                    if (passcheck) {
-                        res.json(usuario)
-                        res.status(200)
-                    } else {
-                        res.status(401).json({ success: false, message: 'Autenticação do Usuário falhou. ' });
-                    }
-                });
-            }
-        },
-            function (erro) {
-                console.log(erro);
-                res.status(404).json(erro);
-            }
-        );
-    }
+        ad.authenticate(_user, _pw, function(err, auth) {
+          if (err) {
+            console.log('ERROR: '+JSON.stringify(err));
+            return;
+          }
+
+          if (auth) {
+            console.log('Authenticated!');
+          }
+          else {
+            console.log('Authentication failed!');
+          }
+      });
+    };
+
     return controller;
 }
