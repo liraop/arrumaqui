@@ -1,8 +1,12 @@
 //Controller para a entidade usuario
+require('dotenv').config();
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var ActiveDirectory = require('activedirectory2');
-
+var config = { url: process.env.AD_URL,
+               baseDN: process.env.AD_BASEDN,
+               username: process.env.AD_BINDUSER,
+               password: process.env.AD_BINDPW }
 
 module.exports = function (app) {
 
@@ -199,39 +203,29 @@ module.exports = function (app) {
     //Autentica Login
     controller.autenticaLogin = (req, res, next) => {
         console.log('API: autenticaLogin');
-        let _emailUsuario = req.body.email;
-        let _senha = req.body.senha
+        let _user = req.body.email;
+        let _pw = req.body.senha
 
-        let criterio = { "contato.email": _emailUsuario };
-        Usuario.findOne(criterio).then(function (usuario) {
+        ad.authenticate(_user, _pw, function(err, auth) {
+          if (err) {
+            res.status(401).json({ success: false, message: 'Autenticação do Usuário falhou. Usuário não encontrado!' });
+            return;
+          }
 
-            if (!usuario) {
-                res.status(401).json({ success: false, message: 'Autenticação do Usuário falhou. Usuário não encontrado!' });
-            } else if (usuario) {
-
-                bcrypt.compare(_senha, usuario.senha).then(function (passcheck) {
-                    if (passcheck) {
-                        var token = jwt.sign(usuario, usuario.senha, {
-                            expiresIn: 1440
-                        });
-                        res.status(200).json({
-                            success: true,
-                            message: 'Token criado!!!',
-                            token: token
-                        });
-                    } else {
-                        res.status(401).json({ success: false, message: 'Autenticação do Usuário falhou. ' });
-                    }
-
-                });
-
+          if (auth) {
+              var token = jwt.sign(_user, _pw, {
+                exp: 1440
+              });
+              res.status(200).json({
+                success: true,
+                message: 'Token criado!!!',
+                token: token
+              });
             }
-        },
-            function (erro) {
-                console.log(erro);
-                res.status(404).json(erro);
-            }
-        );
+          else {
+              res.status(401).json({ success: false, message: 'Autenticação do Usuário falhou. ' });
+          }
+      });
     }
 
     //Autentica usuario
