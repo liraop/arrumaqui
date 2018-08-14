@@ -23,5 +23,5 @@ module.exports = function (app) {
         .get(controller.listaServicos);
 
     app.route('/api/login')
-        .post(controller.autenticaUsuario);
+        .post(controller.autenticaLogin);
 }
