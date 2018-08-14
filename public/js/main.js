@@ -38,6 +38,10 @@ app.config(($routeProvider) => {
             templateUrl: 'partials/editar.html',
             controller: 'EditarController'
         })
+        .when('/esqueciMinhaSenha', {
+            templateUrl: 'partials/esqueciMinhaSenha.html',
+            controller: 'EsqueciMinhaSenhaController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -52,14 +56,14 @@ app.run(($rootScope, $location, $localStorage) => {
     $rootScope.$on('$locationChangeStart', () => {
         if ($rootScope.token == null &&
             rotasBloqueadasNaoLogado.indexOf($location.path()) != -1) {
-            $location.path('/login');
+            $location.path('/');
         }
     });
 
     $rootScope.$on('$locationChangeStart', () => {
         if ($rootScope.token != null &&
             rotasBloqueadasLogado.indexOf($location.path()) != -1) {
-            $location.path('/home');
+            $location.path('/editar');
         }
     });
 
